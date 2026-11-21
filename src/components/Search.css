@@ -1,6 +1,9 @@
 .search
 {
     padding: 2.4%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
     .search input
     {
@@ -9,8 +12,17 @@
         border:0;
         text-align: center;
     }
-    .search input:focus
+        .search input:focus
+        {
+            outline:none;
+            border-bottom: solid 1px #AAA;
+        }
+    .search button
     {
-        outline:none;
-        border-bottom: solid 1px #AAA;
+        background-color: #181c23;
+        color:white;
+        padding: 0px 16px;
+        font-size: 24px;
+        border:none;
+        border-radius: 8px;
     }

@@ -20,19 +20,19 @@ class Main extends React.Component
             .then(data => this.setState({movies: data.Search || [] }))
     }
 
-    searchMovie=(str) =>
+    searchMovie=(str, type='all') =>
     {
-         fetch(`https://www.omdbapi.com/?s=${str}&apikey=fcdc0762`)
+         fetch(`https://www.omdbapi.com/?s=${str}${type !== 'all' ? `&type=${type}` :''}&apikey=fcdc0762`)
             .then(response => response.json())
-            .then(data => this.setState({movies: data.Search || [] }))
+            .then(data => this.setState({movies: data.Search}))
     }
     render()
     {
         return (
             <main >
                 <Search searchMovie={this.searchMovie}/>
-
-                {
+                {   
+                    this.state.movies == null ? <h1>Введите поисковый запрос</h1>:
                     this.state.movies.length==0 ?
                     <Preloader /> :
                     <MovieList movies={this.state.movies}/>
