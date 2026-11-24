@@ -36,7 +36,7 @@ class Search extends React.Component
                             onChange={(e) => this.setState({search:e.target.value})}
                             onKeyUp={this.handlKey}
                     />
-                    <button onClick={() => this.props.searchMovie(this.state.search)}>
+                    <button onClick={() => this.props.searchMovie(this.state.search, this.state.type)}>
                         Поиск
                     </button>
                 </div>
