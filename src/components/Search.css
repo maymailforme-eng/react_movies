@@ -1,9 +1,9 @@
 .search
 {
     padding: 2.4%;
-    display: flex;
+    /* display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center; */
 }
     .search input
     {
@@ -26,3 +26,19 @@
         border:none;
         border-radius: 8px;
     }
+    .radio
+    {
+        display:flex;
+        justify-content: space-around;
+        align-items: center;
+        margin: 0 32px;
+        padding: 16px;
+        border-bottom: solid 1px lightgray;
+
+        font-size: 20px;
+    }
+        .radio > input[type=radio]
+        {
+            width: 20px;
+            height: 20px;
+        }
