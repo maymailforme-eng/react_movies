@@ -72,3 +72,10 @@
 {
     width: 42px;
 }
+
+.page-numbers .active-page {
+    background-color: #ffffff;
+    color: #006E81;
+    border-color: #006E81;
+    font-weight: bold;
+}

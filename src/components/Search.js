@@ -60,15 +60,40 @@ class Search extends React.Component
     render()
     {
         let itemsPerPage = 10;
-        let totalPages = this.props.totalItems/itemsPerPage;
-        const lastIndex = totalPages <= 10 ? totalPages + 1 : this.state.page + itemsPerPage;
-        const firstIndex = totalPages <= 10 ? lastIndex - itemsPerPage + lastIndex + 1 : lastIndex - itemsPerPage;
+        let visiblePagesCount = 5;
 
-        let num =[];
-        for(let i = 0; i < totalPages; ++i)
-        {
-            num.push(i);
+        let totalPages = Math.ceil(this.props.totalItems / itemsPerPage);
+        let half = Math.floor(visiblePagesCount / 2);
+
+
+
+        let firstPage = Math.max(1, this.state.page - half);
+        let lastPage = firstPage + visiblePagesCount - 1;
+
+
+        // Не позволяем последней странице выйти за totalPages
+        if (lastPage > totalPages) 
+            {
+            lastPage = totalPages;
+            firstPage = Math.max(1, lastPage - visiblePagesCount + 1);
+            }
+
+
+
+        const visiblePages = [];
+
+        for (let page = firstPage; page <= lastPage; page++) {
+            visiblePages.push(page);
         }
+
+        // const lastIndex = totalPages <= 10 ? totalPages + 1 : this.state.page + itemsPerPage;
+        // const firstIndex = totalPages <= 10 ? lastIndex - itemsPerPage + lastIndex + 1 : lastIndex - itemsPerPage;
+
+        // let num =[];
+        // for(let i = 0; i < totalPages; ++i)
+        // {
+        //     num.push(i);
+        // }
 
 
         return(
@@ -92,21 +117,34 @@ class Search extends React.Component
                 </div>
                 <div className="pagination">
                     <button className="btn" onClick={this.prevPage}>Prev</button>
-                    <div className="page-numbers">
+                    {/* <div className="page-numbers">
                         {
                             num.slice(firstIndex, lastIndex).map
                             (
-                                (element, index) =>
+                                (pageNumber, index) =>
                                 (
-                                    <button className="btn"
+                                    <button className={`btn ${this.state.page === pageNumber ? 'active-page' : ''}`}
                                             key={index}
-                                            onClick={()=> this.setPage(element)}
+                                            onClick={()=> this.setPage(pageNumber)}
                                     >
-                                        {element}
+                                        {pageNumber}
                                     </button>
                                 )
                             )
                         }
+                    </div> */}
+                    <div className="page-numbers">
+                        {visiblePages.map(pageNumber => (
+                            <button
+                                className={`btn ${
+                                    this.state.page === pageNumber ? 'active-page' : ''
+                                }`}
+                                key={pageNumber}
+                                onClick={() => this.setPage(pageNumber)}
+                            >
+                                {pageNumber}
+                            </button>
+                        ))}
                     </div>
                     <button className="btn" onClick={this.nextPage}>Next</button>
                 </div>
